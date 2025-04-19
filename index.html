@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TobTek | Password Strength Checker</title>
+  <style>
+    body {
+      background-color: #0f1117;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #00f7ff;
+      margin-bottom: 1rem;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      width: 300px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      background-color: #1c1f26;
+      color: #fff;
+    }
+
+    .strength {
+      font-size: 1.1rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .weak {
+      color: #ff4d4f;
+    }
+
+    .medium {
+      color: #ffa500;
+    }
+
+    .strong {
+      color: #4caf50;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Password Strength Checker</h1>
+
+  <input type="password" id="password" placeholder="Enter your password">
+  <div id="strengthResult" class="strength">Strength: -</div>
+
+  <footer>© 2025 TobTek Limited. All rights reserved.</footer>
+
+  <script>
+    const passwordInput = document.getElementById("password");
+    const result = document.getElementById("strengthResult");
+
+    passwordInput.addEventListener("input", () => {
+      const val = passwordInput.value;
+      let strength = "Weak";
+      let className = "weak";
+
+      const hasLower = /[a-z]/.test(val);
+      const hasUpper = /[A-Z]/.test(val);
+      const hasNumber = /\d/.test(val);
+      const hasSpecial = /[@$!%*?&]/.test(val);
+      const lengthValid = val.length >= 8;
+
+      const score = [hasLower, hasUpper, hasNumber, hasSpecial].filter(Boolean).length;
+
+      if (score >= 3 && lengthValid) {
+        strength = "Strong";
+        className = "strong";
+      } else if (score >= 2 && val.length >= 6) {
+        strength = "Medium";
+        className = "medium";
+      }
+
+      result.textContent = `Strength: ${strength}`;
+      result.className = `strength ${className}`;
+    });
+  </script>
+
+</body>
+</html>
