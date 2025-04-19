@@ -21,15 +21,35 @@
       margin-bottom: 1rem;
     }
 
-    input[type="password"] {
+    .input-wrapper {
+      position: relative;
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    input[type="password"],
+    input[type="text"] {
       padding: 12px;
       border-radius: 8px;
       border: none;
-      width: 300px;
+      width: 100%;
       font-size: 1rem;
-      margin-bottom: 1rem;
       background-color: #1c1f26;
       color: #fff;
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .toggle-visibility svg {
+      fill: #aaa;
+      width: 20px;
+      height: 20px;
     }
 
     .strength {
@@ -62,7 +82,15 @@
 
   <h1>Password Strength Checker</h1>
 
-  <input type="password" id="password" placeholder="Enter your password">
+  <div class="input-wrapper">
+    <input type="password" id="password" placeholder="Enter your password">
+    <span class="toggle-visibility" onclick="toggleVisibility()">
+      <svg id="eyeIcon" viewBox="0 0 24 24">
+        <path d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+      </svg>
+    </span>
+  </div>
+
   <div id="strengthResult" class="strength">Strength: -</div>
 
   <footer>© 2025 TobTek Limited. All rights reserved.</footer>
@@ -95,6 +123,11 @@
       result.textContent = `Strength: ${strength}`;
       result.className = `strength ${className}`;
     });
+
+    function toggleVisibility() {
+      const type = passwordInput.getAttribute("type");
+      passwordInput.setAttribute("type", type === "password" ? "text" : "password");
+    }
   </script>
 
 </body>
