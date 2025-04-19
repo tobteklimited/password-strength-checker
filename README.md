@@ -42,7 +42,7 @@ Password Strength Checker
 
 ### 🔗 Live Demo
 
-🌐 Check it out here: [TobTek limited](https://tobteklimited.github.io/)
+🌐 Check it out here: [TobTek limited](https://tobteklimited.github.io/password-strength-checker/)
 
 ---
 
